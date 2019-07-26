@@ -46,23 +46,35 @@
 					
 				</Grid>
 				</HierarchicalDataTemplate>
-			
-			<Style x:Key="TreeViewItemStyle"  TargetType="{x:Type TreeViewItem}">
+
+			<!--ne postoji referenca ka ExpandCollapseToggleStyle-->
+			<Style x:Key="TreeViewItemStyle"  TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource {x:Type TreeViewItem }}">
 				<Setter Property="BorderThickness" Value="1"/>
-				<Setter Property="FontSize" Value="12"/>
+				<Setter Property="FontSize" Value="15"/>
 				<Setter Property="Foreground" Value="RoyalBlue" />
 				<Setter Property="Background" Value="DarkGray"/>
 				<Setter Property="BorderBrush" Value="Black"/>
 				<Setter Property="Focusable" Value="False"/>
-				<!--ima neka fora sa ovim setterima, kad se oni stave onda iz nekog razloga ne radi dobro-->
-				<!--<Setter Property="Template">
+				<Setter Property="Template">
 					<Setter.Value>
 						<ControlTemplate TargetType="{x:Type TreeViewItem}">
-							<Border Name="Highlight"
-								Background="Transparent"/>
+							<Border Name="HighlightNeki"
+								Background="Green">
+								<Grid MinHeight="20">
+									<Grid.RowDefinitions>
+										<RowDefinition/>
+										<RowDefinition/>
+									</Grid.RowDefinitions>
+									<Border x:Name="PART_Content" Margin="16,0,0,0" HorizontalAlignment="Stretch" Background="Transparent">
+										<ContentPresenter x:Name="PART_Header" Margin="4,0" VerticalAlignment="Center" ContentSource="Header" />
+									</Border>
+									<ToggleButton  x:Name="Expander" HorizontalAlignment="Left" ClickMode="Press" 
+											 />
+								</Grid>
+							</Border>
 						</ControlTemplate>
 					</Setter.Value>
-				</Setter>-->
+				</Setter>
 			</Style>
 		</ResourceDictionary>
 	</Window.Resources>
