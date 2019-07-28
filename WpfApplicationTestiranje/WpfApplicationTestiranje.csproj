@@ -63,6 +63,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\CoveredToBackground.cs" />
+    <Compile Include="Converters\CoveredToString.cs" />
+    <Compile Include="Converters\ControlSelectedConverter.cs" />
+    <Compile Include="Converters\ViewSelectedConverter.cs" />
     <Compile Include="Viewmodel\MainVM.cs" />
     <Compile Include="Viewmodel\ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">
@@ -110,7 +114,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\arrowForTV.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

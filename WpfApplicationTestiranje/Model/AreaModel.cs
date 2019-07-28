@@ -12,7 +12,9 @@ namespace WpfApplicationTestiranje.Model
 	{
 		private string name;
 		bool isCheckedForView;
+        bool isCovered;
 		private ObservableCollection<AreaModel> subareas;
+        int userCoveringArea;
 		public AreaModel()
 		{
 
@@ -23,6 +25,8 @@ namespace WpfApplicationTestiranje.Model
 			this.name = name;
 			this.IsCheckedForView = true;
 			this.subareas = new ObservableCollection<AreaModel>();
+            this.isCovered = false; //do to vrati se na ovo
+            this.userCoveringArea = 5;
 		}
 		public string Name
 		{
@@ -36,8 +40,32 @@ namespace WpfApplicationTestiranje.Model
 				}
 			}
 		}
+        public bool IsCovered
+        {
+            get { return isCovered; }
+            set
+            {
+                if (isCovered != value)
+                {
+                    isCovered = value;
+                    OnPropertyChanged("IsCovered");
+                }
+            }
+        }
 
-		public bool IsCheckedForView
+        public int UsersCoveringArea
+        {
+            get { return 6; }
+            //set
+            //{
+            //    if (isCovered != value)
+            //    {
+            //        isCovered = value;
+            //        OnPropertyChanged("UsersCoveringArea");
+            //    }
+            //}
+        }
+        public bool IsCheckedForView
 		{
 			get { return isCheckedForView; }
 			set

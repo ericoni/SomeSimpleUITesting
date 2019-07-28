@@ -52,7 +52,7 @@ namespace WpfApplicationTestiranje.Viewmodel
 
 			areasTemp.Add(a7);
 
-			areasTemp = FilterTopAreaAors(areasTemp);
+			areasTemp = FilterTopAreaAors(areasTemp);//to do sada je without filter
 			Areas = new ObservableCollection<AreaModel>(areasTemp);
 		}
 
