@@ -15,9 +15,9 @@ namespace WpfApplicationTestiranje.Converters
         {
             if ((bool)value)
             {
-                    return new SolidColorBrush(Colors.PaleGreen);
+                    return new SolidColorBrush(Colors.SeaGreen);//PaleGreen
             }
-            return new SolidColorBrush(Colors.DarkGray);//Salmon (dodje kao neka crvena)
+            return new SolidColorBrush(Colors.DimGray);//Salmon (dodje kao neka crvena) DarkGray
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

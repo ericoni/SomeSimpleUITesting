@@ -44,6 +44,8 @@
 		<noviNamespace:NewUserControl DataContext="{Binding MyNewViewModel}">
 			
 		</noviNamespace:NewUserControl>
+		<CheckBox x:Name="checkBox" Content="CheckBox" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed"/>
+
 	</Grid>
 
 </Window>

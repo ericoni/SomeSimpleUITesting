@@ -26,7 +26,7 @@ namespace WpfApplicationTestiranje
 			try
 			{
 				InitializeComponent();
-				this.DataContext = new MainVM();
+				this.DataContext = new MainVM(treeViewAORBoard);
 			}
 			catch(Exception e)
 			{

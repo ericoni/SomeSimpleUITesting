@@ -14,9 +14,9 @@ namespace WpfApplicationTestiranje.Converters
         {
             if ((bool)value)
             {
-                return "Covered";
+                return "Covered Area";
             }
-            return "Uncovered";
+            return "Uncovered Area";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

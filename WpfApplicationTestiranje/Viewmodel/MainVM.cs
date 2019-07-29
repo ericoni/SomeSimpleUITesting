@@ -4,7 +4,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Input;
 using WpfApplicationTestiranje.Model;
+using GalaSoft.MvvmLight.Command;
 
 namespace WpfApplicationTestiranje.Viewmodel
 {
@@ -17,9 +20,12 @@ namespace WpfApplicationTestiranje.Viewmodel
 		private AreaModel a5 = null;
 		private AreaModel a6 = null;
 		private AreaModel a7 = null;
+		TreeView treeView = null;
+		public ICommand ExecuteCommand { get; private set; }
+
 
 		private ObservableCollection<AreaModel> areas = null;
-		public MainVM()
+		public MainVM(TreeView treeView)
 		{
 			a1 = new AreaModel("a1");
 			a2 = new AreaModel("a2");
@@ -30,7 +36,6 @@ namespace WpfApplicationTestiranje.Viewmodel
 			a6 = new AreaModel("a6");
 
 			a7 = new AreaModel("a7");
-
 
 			a1.SubAreas.Add(a2);
 			a1.SubAreas.Add(a3);
@@ -54,6 +59,9 @@ namespace WpfApplicationTestiranje.Viewmodel
 
 			areasTemp = FilterTopAreaAors(areasTemp);//to do sada je without filter
 			Areas = new ObservableCollection<AreaModel>(areasTemp);
+
+			ExecuteCommand = new RelayCommand(() => ExecuteExecuteCommand());
+			this.treeView = treeView;
 		}
 
 		public ObservableCollection<AreaModel> Areas
@@ -69,6 +77,29 @@ namespace WpfApplicationTestiranje.Viewmodel
 			}
 		}
 
+		private List<string> TestZaTreeView()
+		{
+			List<string> selectedNames = new List<string>();
+
+			foreach (var item in treeView.Items.OfType< AreaModel>())
+			{
+				GetSelected(item, ref selectedNames);
+			}
+			return selectedNames;
+		}
+		public void GetSelected(AreaModel node, ref List<string> s)
+		{
+			if (node.IsCheckedForView)
+				s.Add(node.Name);
+
+			foreach (AreaModel child in node.SubAreas)
+				GetSelected(child, ref s);
+		}
+
+		private void ExecuteExecuteCommand()
+		{
+			TestZaTreeView();
+		}
 		#region Private Methods
 		private List<AreaModel> FilterTopAreaAors(List<AreaModel> areas)
 		{
