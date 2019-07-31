@@ -6,6 +6,7 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:WpfApplicationTestiranje"
+		xmlns:models="clr-namespace:WpfApplicationTestiranje.Model"
 		mc:Ignorable="d"
 		Title="AOR Board Window" Height="950" Width="620">
 	<Window.Resources>
@@ -399,7 +400,8 @@
 					</Setter.Value>
 				</Setter>
 			</Style>
-
+			<!--preuzeto je ranije neki kod sa: i nije bas radio expand toggle : https://www.codeproject.com/Articles/236621/WPF-Treeview-Styling-and-Template-Binding-using-MV-->
+		
 		</ResourceDictionary>
 	</Window.Resources>
 
@@ -412,7 +414,7 @@
 			<RowDefinition Height="90"/>
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
-		<TreeView
+		<!--<TreeView
 			Grid.Column="0"
 			Grid.RowSpan="2"
 			x:Name="treeViewAORBoard"
@@ -420,14 +422,96 @@
 			ItemsSource="{Binding Areas}"
 			Height="800" Margin="20,20,0,0" 
 			VerticalAlignment="Top"
-			Style="{StaticResource {x:Type TreeView}}"
 			ItemTemplate="{StaticResource Hierarchy}"
-			ItemContainerStyle="{StaticResource TreeViewItemStyle}"
-			Width="500"/>
+			Style="{StaticResource {x:Type TreeView}}"
+			Style="{StaticResource {x:Type TreeView}}"
+			ItemContainerStyle="{StaticResource TreeViewItemStyle1}"
+			Width="500"/>-->
+		<TreeView
+			Grid.Column="0"
+			Grid.RowSpan="2"
+			x:Name="treeViewAORBoard"
+			HorizontalAlignment="Left"
+			ItemsSource="{Binding Areas}"
+			Height="620" 
+			Width="490"
+			Margin="20,20,0,0" 
+			VerticalAlignment="Top"
+			>
+			<TreeView.ItemContainerStyle>
+				<Style TargetType="{x:Type TreeViewItem}">
+				</Style>
+			</TreeView.ItemContainerStyle>
+			<TreeView.Resources>
+				<HierarchicalDataTemplate ItemsSource="{Binding SubAreas}" DataType="{x:Type models:AreaModel}">
+					<Grid Margin="0,5">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" SharedSizeGroup="gr0"/>
+							<ColumnDefinition Width="Auto" SharedSizeGroup="gr1"/>
+							<ColumnDefinition Width="Auto" SharedSizeGroup="gr2"/>
+							<ColumnDefinition Width="Auto" SharedSizeGroup="gr3"/>
+							<ColumnDefinition Width="Auto" SharedSizeGroup="gr4"/>
+						</Grid.ColumnDefinitions>
+						<Border BorderBrush="Gainsboro" BorderThickness="0.5">
+							<StackPanel Orientation="Horizontal" Margin="0,10">
+								<TextBlock Grid.Column="0" Text="{Binding Name}" VerticalAlignment="Center" Margin="4,4,20,4" FontSize="13"/>
+
+								<Border Background="{Binding ViewStatus, Converter={StaticResource CoveredToBackConverter}}">
+									<CheckBox	
+									Grid.Column="1"
+									FlowDirection="LeftToRight"
+									VerticalAlignment="Center" Margin="4,2,20,2" HorizontalAlignment="Stretch"
+									IsChecked="{Binding IsCheckedForView, UpdateSourceTrigger=PropertyChanged}"
+									Height="25" >
+										<CheckBox.Content>
+											<TextBlock Text="View" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+										</CheckBox.Content>
+									</CheckBox>
+								</Border>
+
+								<Border Background="{Binding ControlStatus, Converter={StaticResource CoveredToBackConverter}}" Margin="5,0,0,0">
+									<CheckBox	
+									Grid.Column="2"
+									FlowDirection="LeftToRight"
+									VerticalAlignment="Center" Margin="4,2,20,2" HorizontalAlignment="Stretch"
+									x:Name="CheckBoxControl"
+									
+									Height="25" >
+										<CheckBox.Content>
+											<TextBlock Text="Control" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+										</CheckBox.Content>
+									</CheckBox>
+								</Border>
+
+								<Border Background="{Binding IsCovered, Converter={StaticResource CoveredToBackConverter}}" Margin="15,0,0,0">
+									<TextBlock Grid.Column="3" Margin="30,10" 
+										   Text="{Binding IsCovered, Converter={StaticResource CoveredToStringConverter}}"
+										   FontSize="11">
+									</TextBlock>
+								</Border>
+								<Border>
+									<StackPanel Orientation="Vertical">
+										<Label Grid.Column="4" Content="Number of users" FontSize="11"></Label>
+										<TextBlock Grid.Column="4" 
+											   Text="{Binding UsersCoveringArea}" 
+											   HorizontalAlignment="Center"
+											   FontSize="11"></TextBlock>
+									</StackPanel>
+								</Border>
+
+							</StackPanel>
+						</Border>
+					</Grid>
+				</HierarchicalDataTemplate>
+			</TreeView.Resources>
+		</TreeView>
+		
 		<StackPanel Grid.Column="1" Grid.Row="0" Margin="0,20,0,0">
 			<Button x:Name="SelectDeselectAllButton" Content="Select/Deselect all" Grid.Column="1" />
 			<Button x:Name="ExecuteButton" Command="{Binding ExecuteCommand}" Content="Execute" Grid.Column="1" />
 		</StackPanel>
 			<Button x:Name="New" Content="Cancel" Grid.Column="1" Grid.Row="1"/>
+		
+		
 	</Grid>
 </Window>
