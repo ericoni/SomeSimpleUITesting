@@ -510,8 +510,13 @@
 			<Button x:Name="SelectDeselectAllButton" Content="Select/Deselect all" Grid.Column="1" />
 			<Button x:Name="ExecuteButton" Command="{Binding ExecuteCommand}" Content="Execute" Grid.Column="1" />
 		</StackPanel>
-			<Button x:Name="New" Content="Cancel" Grid.Column="1" Grid.Row="1"/>
-		
-		
-	</Grid>
+			<!--<Button x:Name="New" Content="Cancel" Grid.Column="1" Grid.Row="1"/>-->
+        <Button Grid.Column="1" Grid.Row="1" Background="Transparent">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontSize="15" ><Bold>5</Bold> </TextBlock>
+                <Image Source="Images/alarmBell.png" Height="30" Width="30"/>
+            </StackPanel>
+        </Button>
+
+    </Grid>
 </Window>
